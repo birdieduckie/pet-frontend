@@ -2,8 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
-  align-self: flex-end;
-  background: white;
-  border: solid black;
-  width: 20%;
+  flex-direction: column;
+  height: 100%;
+  background: papayawhip;
 `
