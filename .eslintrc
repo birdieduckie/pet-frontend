@@ -13,7 +13,7 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended"
   ],
-  "plugins": ["react", "react-hooks", "import", "babel", "prettier"],
+  "plugins": ["react", "react-hooks", "import", "babel", "prettier", "html"],
   "rules": {
     "quotes": [2, "single", { "avoidEscape": true }],
     "max-len": [1, 80, 2],

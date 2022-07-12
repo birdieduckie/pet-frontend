@@ -1,18 +1,28 @@
 import { FC } from 'react'
 
-import { User } from '../User/User'
+import { useAppDispatch } from 'hooks/store'
+import { createPost } from 'store/posts/postSlice'
 
-import { Container } from './styled'
+import { UserInfo } from '../UserInfo/UserInfo'
+
+import { Container, Create } from './styled'
 
 interface MenuProps {
   text: string
 }
 
 export const Menu: FC<MenuProps> = ({ text }) => {
+  const dispatch = useAppDispatch()
+
+  const setPost = () => dispatch(createPost)
+
   return (
     <>
-      <Container> {text}</Container>
-      <User text='User'></User>
+      <Container>
+        {text}
+        <Create onClick={setPost}></Create>
+        <UserInfo name='User'></UserInfo>
+      </Container>
     </>
   )
 }

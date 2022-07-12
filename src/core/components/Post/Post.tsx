@@ -1,6 +1,9 @@
 import { FC } from 'react'
 
-import { Container, Like } from './styled'
+import { UserInfo } from '../UserInfo/UserInfo'
+import { Comment } from '../Comment/Comment'
+
+import { Container, Like, Head } from './styled'
 
 interface PostProps {
   text: string
@@ -9,8 +12,13 @@ interface PostProps {
 export const Post: FC<PostProps> = ({ text }) => {
   return (
     <Container>
+      <Head>
+        <UserInfo name='fdjel'></UserInfo>
+      </Head>
+
       {text}
-      <Like></Like>
+      {/* <Like></Like> */}
+      <Comment text='Nice!'></Comment>
     </Container>
   )
 }

@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { Button } from 'core/shared/Button/Button'
+
 export const Container = styled.div`
   display: flex;
   justify-self: stretch;
@@ -11,4 +13,10 @@ export const Container = styled.div`
   /* @media screen and (max-width: 600px) {
     width: 100%;
   } */
+`
+
+export const Create: typeof Button = styled(Button)`
+  display: flex;
+  background: yellow;
+  cursor: pointer;
 `
