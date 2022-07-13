@@ -15,6 +15,12 @@ export const Container = styled.div`
   } */
 `
 
+export const Field = styled.input`
+  display: flex;
+  background: lightblue;
+  color: darkblue;
+`
+
 export const Create: typeof Button = styled(Button)`
   display: flex;
   background: yellow;
