@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
 import postReducer from './posts/postSlice'
+import userReducer from './users/userSlice'
 
 export const rootReducer = combineReducers({
-  posts: postReducer
+  posts: postReducer,
+  users: userReducer
 })

@@ -1,33 +1,33 @@
 import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit'
 
-export interface Post {
+export interface User {
   id: string
-  text: string
+  name: string
 }
 
-export const POSTS_SLICE = 'posts'
+export const USERS_SLICE = 'users'
 
-export const postSlice = createSlice({
-  name: POSTS_SLICE,
-  initialState: [] as Post[],
+export const userSlice = createSlice({
+  name: USERS_SLICE,
+  initialState: [] as User[],
   reducers: {
-    createPost: {
-      prepare: (text: Post['text']) => {
+    createUser: {
+      prepare: (name: User['name']) => {
         const id = nanoid()
-        return { payload: { id, text } }
+        return { payload: { id, name } }
       },
-      reducer: (state, action: PayloadAction<Post>) => {
+      reducer: (state, action: PayloadAction<User>) => {
         state.push(action.payload)
       }
     },
-    setPosts(state, action: PayloadAction<Post[]>) {
+    setUsers(state, action: PayloadAction<User[]>) {
       return action.payload
     }
   }
 })
 
-const { actions, reducer } = postSlice
+const { actions, reducer } = userSlice
 
-export const { createPost, setPosts } = actions
+export const { createUser, setUsers } = actions
 
-export default postSlice.reducer
+export default userSlice.reducer

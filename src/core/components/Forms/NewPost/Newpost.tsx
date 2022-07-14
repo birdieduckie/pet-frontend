@@ -1,12 +1,8 @@
 import { FC } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
-import { useAppDispatch } from 'hooks/store'
-
-import { createPost } from 'store/posts/postSlice'
-
 interface NewPost {
-  name: string
+  userName: string
   text: string
   contact: string
 }
@@ -16,19 +12,13 @@ export const NewPost: FC = () => {
 
   const onSubmit: SubmitHandler<NewPost> = data => console.log(data)
 
-  const dispatch = useAppDispatch()
-
-  const values = watch(['name', 'text', 'contact'])
-
-  const setPost = () => {
-    dispatch(createPost(...values))
-  }
+  const values = watch(['userName', 'text', 'contact'])
 
   console.log(values)
   return (
-    <form onSubmit={handleSubmit(onSubmit, setPost)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <label>Как вас зовут?</label>
-      <input {...register('name')} />
+      <input {...register('userName')} />
       <label>Опишите, что произошло</label>
       <input
         placeholder='Нашли больного котенка, потеряли животное...'
@@ -39,7 +29,7 @@ export const NewPost: FC = () => {
         placeholder='Номер телефона, почта, WhatsApp...'
         {...register('contact')}
       />
-      <input type='submit' onClick={setPost} />
+      <input type='submit' />
     </form>
   )
 }

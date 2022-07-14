@@ -9,8 +9,7 @@ export const Feed: FC = () => {
   return (
     <Container>
       <Menu text='Main'></Menu>
-      <Post text='Hello!' />
-      <Post text='Zhopa'></Post>
+      <Post id='1' text='Hello!' contact='z' />
     </Container>
   )
 }

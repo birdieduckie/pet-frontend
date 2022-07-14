@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit'
 
 import { Post } from 'core/components/Post/Post'
-import { NewPost } from 'core/components/Forms/NewPost/NewPost'
+import userSlice from 'store/users/userSlice'
 
 export interface Post {
   id: string
@@ -29,6 +29,13 @@ export const postSlice = createSlice({
         state.push(action.payload)
       }
     },
+    // updatePost: (state, action: PayloadAction<Post['id']>) => {
+    //   return state.map(post =>
+    //     post.id === action.payload ? {
+    //   ...post, checked: !post.checked
+    // } : post
+    // //   )
+    // // },
     setPosts(state, action: PayloadAction<Post[]>) {
       return action.payload
     }

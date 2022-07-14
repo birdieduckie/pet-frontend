@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 
-import { Button } from 'core/shared/Button/Button'
-
 export const Container = styled.div`
   display: flex;
   justify-self: stretch;
