@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { UserInfo } from '../UserInfo/UserInfo'
 import { Comment } from '../Comment/Comment'
 
-import { Container, Like, Head } from './styled'
+import { Container, Head } from './styled'
 
 interface PostProps {
   text: string

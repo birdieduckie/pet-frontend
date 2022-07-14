@@ -20,9 +20,3 @@ export const Field = styled.input`
   background: lightblue;
   color: darkblue;
 `
-
-export const Create: typeof Button = styled(Button)`
-  display: flex;
-  background: yellow;
-  cursor: pointer;
-`
