@@ -2,7 +2,7 @@ import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit'
 
 export interface User {
   id: string
-  name: string
+  userName: string
 }
 
 export const USERS_SLICE = 'users'
@@ -12,9 +12,9 @@ export const userSlice = createSlice({
   initialState: [] as User[],
   reducers: {
     createUser: {
-      prepare: (name: User['name']) => {
+      prepare: (userName: User['userName']) => {
         const id = nanoid()
-        return { payload: { id, name } }
+        return { payload: { id, userName } }
       },
       reducer: (state, action: PayloadAction<User>) => {
         state.push(action.payload)

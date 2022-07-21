@@ -1,21 +1,18 @@
 import { FC } from 'react'
 
-import { UserInfo } from '../UserInfo/UserInfo'
+import { UserInfo } from '../User/User'
 
 import { Container } from './styled'
 
 interface CommentProps {
   text: string
+  // like: number
 }
-
-// const Avatar: FC = () => {
-//   return <Userpic></Userpic>
-// }
 
 export const Comment: FC<CommentProps> = ({ text }) => {
   return (
     <>
-      <UserInfo name='kqefo'></UserInfo>
+      <UserInfo userName='kqefo' userPic='none'></UserInfo>
       <Container>{text}</Container>
     </>
   )

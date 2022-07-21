@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit'
 
 import { Post } from 'core/components/Post/Post'
-import userSlice from 'store/users/userSlice'
+
+// type SliceState = { state: 'loading' } | { state: 'finished'; data: [] as Post }
+// const initialState: SliceState = { state: 'finished', data: [] }
 
 export interface Post {
   id: string
@@ -14,8 +16,11 @@ export const POSTS_SLICE = 'posts'
 
 export const postSlice = createSlice({
   name: POSTS_SLICE,
-  initialState: [] as Post[],
+  initialState: { posts: [] as Post[], isLoading: false },
   reducers: {
+    getPostRequest(state, action: PayloadAction<boolean>) {
+      state.isLoading = true
+    },
     createPost: {
       prepare: (
         text: Post['text'],
@@ -26,7 +31,7 @@ export const postSlice = createSlice({
         return { payload: { id, text, name, contact } }
       },
       reducer: (state, action: PayloadAction<Post>) => {
-        state.push(action.payload)
+        state.posts.push(action.payload)
       }
     },
     // updatePost: (state, action: PayloadAction<Post['id']>) => {
@@ -37,13 +42,13 @@ export const postSlice = createSlice({
     // //   )
     // // },
     setPosts(state, action: PayloadAction<Post[]>) {
-      return action.payload
+      state.posts = action.payload
     }
   }
 })
 
 const { actions, reducer } = postSlice
 
-export const { createPost, setPosts } = actions
+export const { createPost, setPosts, getPostRequest } = actions
 
 export default postSlice.reducer

@@ -7,6 +7,6 @@ interface ButtonProps {
   children: any
 }
 
-export const Button: FC<ButtonProps> = () => {
-  return <StyledButton></StyledButton>
+export const Button: FC<ButtonProps> = ({ onClick, children }) => {
+  return <StyledButton onClick={onClick}>{children}</StyledButton>
 }

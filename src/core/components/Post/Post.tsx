@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { UserInfo } from '../UserInfo/UserInfo'
+import { UserInfo } from '../User/User'
 import { Comment } from '../Comment/Comment'
 
 import { Container, Head } from './styled'
@@ -8,18 +8,22 @@ import { Container, Head } from './styled'
 interface PostProps {
   id: string
   text: string
-  contact: string
+  image: string
+  likes: number
+  // tags
+  publishDate: Date
+  // owner: typeof UserInfo  или Юзер? пока не очень понимаю
 }
 
-export const Post: FC<PostProps> = ({ id, text, contact }) => {
+export const Post: FC<PostProps> = ({ id, text }) => {
   return (
     <Container>
       <Head>
         {id}
-        <UserInfo name='fdjel'></UserInfo>
+        <UserInfo userName='fdjel' userPic='none'></UserInfo>
       </Head>
       {text}
-      Contact: {contact}
+
       {/* <Like></Like> */}
       <Comment text='Nice!'></Comment>
     </Container>
