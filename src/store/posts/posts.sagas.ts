@@ -6,7 +6,7 @@ import { setPosts, getPostRequest } from './postSlice'
 
 function* getPosts() {
   try {
-    const response = yield call(POST_API.get, '/post?limit=10')
+    const { response } = yield call(POST_API.get, '/post?limit=10')
 
     console.log(response)
 

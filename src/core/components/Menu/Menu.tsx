@@ -28,8 +28,12 @@ export const Menu: FC<MenuProps> = ({ text }) => {
     <>
       <Container>
         {text}
-        <Button onClick={getPosts}>Загрузить посты</Button>
-        <Button onClick={handleClick}>Новый пост</Button>
+        <Button type='download' onClick={getPosts}>
+          Загрузить посты
+        </Button>
+        <Button type='add' onClick={handleClick}>
+          Новый пост
+        </Button>
 
         <UserInfo userName='User' userPic='none'></UserInfo>
       </Container>

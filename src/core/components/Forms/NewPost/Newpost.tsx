@@ -5,9 +5,10 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { createPost } from 'store/posts/postSlice'
 
 interface NewPost {
+  id: undefined
   userName: string
   text: string
-  contact: string
+  image: string
 }
 
 export const NewPost: FC = () => {
@@ -15,7 +16,7 @@ export const NewPost: FC = () => {
 
   const onSubmit: SubmitHandler<NewPost> = data => console.log(data)
 
-  const values = watch(['userName', 'text', 'contact'])
+  const values = watch(['userName', 'text', 'image'])
 
   const dispatch = useAppDispatch()
 
@@ -31,11 +32,8 @@ export const NewPost: FC = () => {
         placeholder='Нашли больного котенка, потеряли животное...'
         {...register('text')}
       />
-      <label>Как с вами связаться?</label>
-      <input
-        placeholder='Номер телефона, почта, WhatsApp...'
-        {...register('contact')}
-      />
+      <label>Фото животного</label>
+      <input placeholder='Добавьте изображение' {...register('image')} />
       <input type='submit' onClick={addPost} />
     </form>
   )

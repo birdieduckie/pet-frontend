@@ -8,7 +8,7 @@ export const StyledButton = styled.button`
   background: pink;
   font-size: 15px;
   cursor: pointer;
-  /* 
+
   ${p =>
     p.type === 'button' &&
     css`
@@ -33,5 +33,5 @@ export const StyledButton = styled.button`
         background: #f45034;
         color: #f9a799;
       }
-    `}; */
+    `};
 `
