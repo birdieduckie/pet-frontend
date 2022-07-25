@@ -10,7 +10,7 @@ export interface Post {
   userName: string
   text: string
   image: string
-  publishDate: string
+  publishDate: Date
 }
 
 export const POSTS_SLICE = 'posts'
@@ -33,38 +33,27 @@ export const postSlice = createSlice({
       prepare: (
         text: Post['text'],
         userName: Post['userName'],
-        image: Post['image'],
-
+        image: Post['image']
       ) => {
         const id = nanoid()
-        return { payload: { id, text, userName, image } }
+        const publishDate = new Date()
+        return { payload: { id, text, userName, image, publishDate } }
       },
       reducer: (state, action: PayloadAction<Post>) => {
         state.posts.push(action.payload)
       }
     },
 
-    editPost: {
-      prepare: (
-        id: Post['id'],
-        text: Post['text'],
-
-      ) => {
-        return { payload: { id, text }}
-      },
-      reducer: (state, action: PayloadAction<Post>) => {
-        state.posts.map((Post) => Post.id === action.payload.id ? Post.text === action.payload.text : Post)
-      }
+    editPost: (state, action: PayloadAction<Post>) => {
+      state.posts.map(Post =>
+        Post.id === action.payload.id ? Post.text === action.payload.text : Post
+      )
     },
-    deletePost(state, action) {},
-  },
-    // updatePost: (state, action: PayloadAction<Post['id']>) => {
-    //   return state.map(post =>
-    //     post.id === action.payload ? {
-    //   ...post, checked: !post.checked
-    // } : post
-    // //   )
-    // // },
+
+    deletePost(state, action: PayloadAction<Post['id']>) {
+      state.posts.filter(Post => Post.id !== action.payload)
+    },
+
     setPosts(state, action: PayloadAction<Post[]>) {
       state.posts = action.payload
     }
