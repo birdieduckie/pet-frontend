@@ -4,12 +4,12 @@ export const Container = styled.div`
   display: flex;
   justify-self: stretch;
   justify-content: space-between;
-  height: 20%;
+  height: 5%;
   width: 100%;
-  background: red;
+  border-bottom: 1px solid #555f6d;
 
-  /* @media screen and (max-width: 600px) {
-    width: 100%;
+  /* @media screen and (max-height: 600px) {
+    height: 5%;
   } */
 `
 
