@@ -16,7 +16,7 @@ export const Comment: FC<CommentProps> = ({ text }) => {
 
   return (
     <>
-      <UserInfo userName='kqefo' userPic='none' onClick={showUser}></UserInfo>
+      <UserInfo onClick={showUser} userName='kqefo' userPic='none'></UserInfo>
       <Container>{text}</Container>
     </>
   )

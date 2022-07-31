@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { Avatar } from './styled'
+import { Container, Avatar } from './styled'
 
 interface UserInfoProps {
   userName: string
@@ -10,9 +10,9 @@ interface UserInfoProps {
 
 export const UserInfo: FC<UserInfoProps> = ({ userName, userPic, onClick }) => {
   return (
-    <>
-      <Avatar onClick={onClick}>{userPic}</Avatar>
+    <Container onClick={onClick}>
+      <Avatar>{userPic}</Avatar>
       {userName}
-    </>
+    </Container>
   )
 }
