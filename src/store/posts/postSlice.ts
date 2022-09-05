@@ -1,17 +1,20 @@
 import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit'
 
-import { Post } from 'core/components/Post/Post'
+import { Post } from 'components/Post/Post'
 
 // type SliceState = { state: 'loading' } | { state: 'finished'; data: [] as Post }
 // const initialState: SliceState = { state: 'finished', data: [] }
 
 export interface Post {
   id: string
-  userName: string
   text: string
   image: string
-  publishDate: Date
+  owner: string
 }
+
+// export const getPostById = (state, id) => {
+//   return state.find(post => post.id === id)
+// }
 
 export const POSTS_SLICE = 'posts'
 
@@ -32,12 +35,12 @@ export const postSlice = createSlice({
     createPost: {
       prepare: (
         text: Post['text'],
-        userName: Post['userName'],
+        owner: Post['owner'],
         image: Post['image']
       ) => {
         const id = nanoid()
-        const publishDate = new Date()
-        return { payload: { id, text, userName, image, publishDate } }
+        // const publishDate = new Date()
+        return { payload: { id, text, owner, image } }
       },
       reducer: (state, action: PayloadAction<Post>) => {
         state.posts.push(action.payload)
