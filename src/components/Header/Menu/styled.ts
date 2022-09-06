@@ -5,5 +5,5 @@ export const Container = styled.div`
   flex-direction: column;
   position: absolute;
   top: 101%;
-  left: 90%;
+  left: 92%;
 `

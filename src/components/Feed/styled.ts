@@ -7,6 +7,9 @@ export const Container = styled.div`
   width: 100%;
   background: white;
 `
+export const Head = styled.div`
+  display: flex;
+`
 export const Posts = styled.div`
   display: flex;
   flex-direction: column;

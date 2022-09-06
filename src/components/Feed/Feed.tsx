@@ -4,7 +4,7 @@ import { FC } from 'react'
 import { Header } from '../Header/Header'
 import { Post } from '../Post/Post'
 
-import { Container, Posts } from './styled'
+import { Container, Posts, Head } from './styled'
 
 import kitten from 'assets/kitten.jpg'
 import { User } from '../User/User'
@@ -15,7 +15,10 @@ export const Feed: FC<FeedProps> = () => {
 
   return (
     <Container>
-      <Header />
+      <Head>
+        <Header />
+      </Head>
+
       <Posts>
         {/* {mockPosts.map(post => ( */}
         <Post
