@@ -1,4 +1,4 @@
-import { useAppDispatch } from 'hooks/store'
+import { useAppDispatch } from 'store/store'
 import { FC } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Input } from 'components/shared/Input/Input'

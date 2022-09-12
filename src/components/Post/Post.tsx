@@ -2,11 +2,12 @@ import { FC, useState } from 'react'
 
 import { useAppDispatch } from 'store/store'
 
-// import { deletePost } from 'store/posts/postSlice'
+import { deletePost } from 'store/posts/postSlice'
 
 import { User } from '../User/User'
 import { Comment } from '../Comment/Comment'
 import { Button } from 'components/shared/Button/Button'
+import { PostMenu } from './PostMenu/PostMenu'
 
 // import { getPostById } from 'store/posts/postSlice'
 
@@ -22,13 +23,13 @@ interface PostProps {
 }
 
 export const Post: FC<PostProps> = ({ id, text, img, likes }) => {
-  // const post = useSelector(state => getPostById(state, id))
-  const dispatch = useAppDispatch()
+  const [isShown, setIsShown] = useState(false)
 
-  const handleDeletePost = () => {
-    // dispatch(deletePost(id))
-    console.log('delete')
+  const showMenu = () => {
+    setIsShown(current => !current)
   }
+
+  // const post = useSelector(state => getPostById(state, id))
 
   const handleClick = () => {
     console.log(likes)
@@ -38,9 +39,10 @@ export const Post: FC<PostProps> = ({ id, text, img, likes }) => {
     <Container>
       <Head>
         <User id='1' username='жопа' avatar='' />
-        <Button variant='inline' onClick={handleDeletePost}>
+        <Button variant='inline' onClick={showMenu}>
           Опции
         </Button>
+        {isShown && <PostMenu id={id}></PostMenu>}
       </Head>
       <ImgWrapper>
         <Img src={img}></Img>

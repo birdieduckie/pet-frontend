@@ -32,6 +32,13 @@ export const postSlice = createSlice({
   reducers: {
     postsReceived(state, action) {
       postsAdapter.setAll(state, action.payload)
+    },
+    editPost(state, action) {
+      console.log(action.payload)
+      postsAdapter.updateOne(state, action.payload)
+    },
+    deletePost(state, action) {
+      postsAdapter.removeOne(state, action.payload)
     }
     // createPost: {
     //   prepare: (text: Post['text'], owner: Post['owner'], img: Post['img']) => {
@@ -67,5 +74,5 @@ export const { actions, reducer } = postSlice
 
 export const postsSelectors = postsAdapter.getSelectors()
 
-export const { postsReceived } = actions
+export const { postsReceived, deletePost, editPost } = actions
 // export const { createPost, setPosts, deletePost } = actions

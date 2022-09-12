@@ -7,6 +7,7 @@ import { SignUp } from 'components/Forms/SignUp/Signup'
 import { SignIn } from 'components/Forms/SignIn/Signin'
 
 import { Container } from './styled'
+import { EditPost } from 'components/Forms/EditPost/EditPost'
 
 interface AppProps {}
 
@@ -21,6 +22,7 @@ export const App: FC<AppProps> = () => {
         />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/login' element={<SignIn />} />
+        <Route path='/editpost' element={<EditPost />} />
         <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
     </Container>
