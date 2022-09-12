@@ -5,7 +5,7 @@ import { StyledButton } from './styled'
 export interface ButtonProps {
   variant: string
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void
-  children: any
+  children?: any
 }
 
 export const Button: FC<ButtonProps> = ({ onClick, children, variant }) => {

@@ -1,17 +1,26 @@
-// import { useAppSelector } from 'hooks/store'
-import { mockPosts } from './mock'
-import { FC } from 'react'
+import { useAppDispatch, useAppSelector } from 'store/store'
+import { FC, useEffect } from 'react'
+
+import { postsReceived, postsSelectors } from 'store/posts/postSlice'
+
 import { Header } from '../Header/Header'
 import { Post } from '../Post/Post'
+import { mockPosts } from './mock'
 
 import { Container, Posts, Head } from './styled'
 
-import kitten from 'assets/kitten.jpg'
-import { User } from '../User/User'
 interface FeedProps {}
 
 export const Feed: FC<FeedProps> = () => {
-  // const posts = useAppSelector(state => state.posts.posts)
+  const dispatch = useAppDispatch()
+
+  const posts = useAppSelector(state => postsSelectors.selectAll(state.posts))
+
+  useEffect(() => {
+    if (posts.length === 0) {
+      dispatch(postsReceived(mockPosts))
+    }
+  }, [dispatch, posts])
 
   return (
     <Container>
@@ -20,17 +29,17 @@ export const Feed: FC<FeedProps> = () => {
       </Head>
 
       <Posts>
-        {/* {mockPosts.map(post => ( */}
-        <Post
-          key='1'
-          id='1'
-          text='Помогите котенку найти дом'
-          publishDate={Date()}
-          img={kitten}
-          likes={16}
-          owner='жопа'
-        />
-        {/* ))} */}
+        {posts?.map(post => (
+          <Post
+            key={post.id}
+            id={post.id}
+            text={post.text}
+            img={post.img}
+            likes={post.likes}
+            createdAt={post.createdAt}
+            owner='жопа'
+          />
+        ))}
       </Posts>
     </Container>
   )

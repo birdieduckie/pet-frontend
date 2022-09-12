@@ -1,9 +1,6 @@
 import { FC, useState } from 'react'
 
 import { useNavigate } from 'react-router-dom'
-import { useAppDispatch } from 'hooks/store'
-
-import { getPostRequest } from 'store/posts/postSlice'
 
 import { User } from '../User/User'
 import { Menu } from './Menu/Menu'
@@ -18,8 +15,6 @@ export interface HeaderProps {}
 export const Header: FC<HeaderProps> = () => {
   const navigate = useNavigate()
 
-  const dispatch = useAppDispatch()
-
   const [isShown, setIsShown] = useState(false)
 
   const showMenu = () => {
@@ -30,7 +25,7 @@ export const Header: FC<HeaderProps> = () => {
     navigate('/newpost', { replace: true })
   }
 
-  const getPosts = () => dispatch(getPostRequest)
+  const getPosts = () => console.log('get posts')
   return (
     <Container>
       <Logo></Logo>

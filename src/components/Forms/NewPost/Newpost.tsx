@@ -1,10 +1,5 @@
 import { FC } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-
-import { useAppDispatch } from 'hooks/store'
-
-import { createPost } from 'store/posts/postSlice'
 
 import { Input } from 'components/shared/Input/Input'
 
@@ -14,7 +9,7 @@ interface NewPost {
   id: undefined
   owner: string
   text: string
-  image: string
+  img: string
 }
 
 export const NewPost: FC<NewPost> = () => {
@@ -22,14 +17,15 @@ export const NewPost: FC<NewPost> = () => {
 
   const onSubmit: SubmitHandler<NewPost> = data => console.log(data)
 
-  const values = watch(['owner', 'text', 'image'])
+  const values = watch(['owner', 'text', 'img'])
 
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
+  // const dispatch = useAppDispatch()
+  // const navigate = useNavigate()
 
   const addPost = () => {
-    dispatch(createPost(...values))
-    navigate('/')
+    console.log('add post')
+    // dispatch(createPost(...values))
+    // navigate('/')
   }
 
   console.log(values)
@@ -51,7 +47,7 @@ export const NewPost: FC<NewPost> = () => {
 
         <Field>
           Фото животного
-          <Input type='file' {...register('image')} />
+          <Input type='file' {...register('img')} />
         </Field>
 
         <input type='submit' onClick={addPost} />
