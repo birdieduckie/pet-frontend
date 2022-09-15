@@ -3,8 +3,8 @@ import { FC, useEffect } from 'react'
 
 import { postsReceived, postsSelectors } from 'store/posts/postSlice'
 
-import { Header } from '../Header/Header'
-import { Post } from '../Post/Post'
+import { Header } from '../../components/Header/Header'
+import { Post } from '../../components/Post/Post'
 import { mockPosts } from './mock'
 
 import { Container, Posts, Head } from './styled'

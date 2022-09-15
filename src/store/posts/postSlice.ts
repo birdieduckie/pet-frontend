@@ -7,7 +7,7 @@ import {
 
 import { Post } from 'components/Post/Post'
 
-import { mockPosts } from 'components/Feed/mock'
+import { mockPosts } from 'screens/Feed/mock'
 // type SliceState = { state: 'loading' } | { state: 'finished'; data: [] as Post }
 // const initialState: SliceState = { state: 'finished', data: [] }
 

@@ -9,27 +9,31 @@ import { createPost } from 'store/posts/postSlice'
 
 import Cat from 'assets/cattato.jpg'
 import { Back, Container, Field } from './styled'
+import { nanoid } from '@reduxjs/toolkit'
 
-interface NewPost {
+interface NewPostForm {
   id: string
   owner: string
   text: string
   img: string
+  createdAt: string
 }
 
-export const NewPost: FC<NewPost> = () => {
-  const { register, handleSubmit, watch } = useForm<NewPost>()
+export const NewPost: FC = () => {
+  const { register, handleSubmit, watch } = useForm<NewPostForm>()
 
-  const onSubmit: SubmitHandler<NewPost> = data => console.log(data)
+  const onSubmit: SubmitHandler<NewPostForm> = data => console.log(data)
 
-  const values = watch(['owner', 'text', 'img'])
+  const [owner, text] = watch(['owner', 'text'])
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
   const addPost = () => {
-    console.log('add post')
-    dispatch(createPost(values))
+    const id = nanoid()
+    const img = Cat
+    const createdAt = Date().toString()
+    dispatch(createPost({ id, owner, text, img, createdAt }))
     navigate('/', { replace: true })
   }
 
@@ -52,7 +56,8 @@ export const NewPost: FC<NewPost> = () => {
         <Field>
           Фото животного
           {/* <Input type='file' {...register('img')} /> */}
-          <img src={Cat} {...register('img')} />
+          <img src={Cat} />
+          {/* <img src={Cat} {...register('img')} /> */}
         </Field>
 
         <input type='submit' onClick={addPost} />

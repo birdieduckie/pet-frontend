@@ -1,7 +1,5 @@
 import styled, { css } from 'styled-components'
 
-import Like from 'assets/like.svg'
-
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
