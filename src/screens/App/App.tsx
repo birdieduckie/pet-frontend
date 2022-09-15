@@ -18,11 +18,11 @@ export const App: FC<AppProps> = () => {
         <Route path='/' element={<Feed />} />
         <Route
           path='/newpost'
-          element={<NewPost id={undefined} owner={''} text={''} img={''} />}
+          element={<NewPost id='1' owner={''} text={''} img={''} />}
         />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/login' element={<SignIn />} />
-        <Route path='/editpost' element={<EditPost />} />
+        <Route path='/edit/post:id' element={<EditPost />} />
         <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
     </Container>

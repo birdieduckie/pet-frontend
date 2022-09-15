@@ -1,26 +1,42 @@
-import { useAppDispatch } from 'store/store'
 import { FC } from 'react'
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { Input } from 'components/shared/Input/Input'
 
-interface EditPost {
-  id: string
-  text: string
+import { useAppDispatch } from 'store/store'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useForm, SubmitHandler } from 'react-hook-form'
+
+import { Input } from 'components/shared/Input/Input'
+import { editPost } from 'store/posts/postSlice'
+
+interface EditPostForm {
+  title: string
 }
 
 export const EditPost: FC = () => {
-  const { register, handleSubmit, watch } = useForm<EditPost>()
+  const { register, handleSubmit } = useForm<EditPostForm>()
 
-  const onSubmit: SubmitHandler<EditPost> = data => console.log(data)
+  const { id } = useParams<{ id: string }>()
 
-  const values = watch(['id', 'text'])
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
-  console.log(values)
+  const onSubmit: SubmitHandler<EditPostForm> = data => {
+    // handleEditPost(text)
+    console.log(data)
+    handleEditPost(data.title)
+  }
+
+  const handleEditPost = (text: string) => {
+    console.log({ id, text })
+
+    dispatch(editPost({ id, changes: { text } }))
+    navigate('/', { replace: true })
+  }
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <label></label>
-      <Input {...register('text')} />
-      <input type='submit' />
+      <Input type='text' {...register('title')} />
+      <button type='submit' />
     </form>
   )
 }

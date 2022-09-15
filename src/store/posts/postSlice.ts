@@ -39,7 +39,11 @@ export const postSlice = createSlice({
     },
     deletePost(state, action) {
       postsAdapter.removeOne(state, action.payload)
+    },
+    createPost(state, action) {
+      postsAdapter.addOne(state, action.payload)
     }
+
     // createPost: {
     //   prepare: (text: Post['text'], owner: Post['owner'], img: Post['img']) => {
     //     const id = nanoid()
@@ -74,5 +78,5 @@ export const { actions, reducer } = postSlice
 
 export const postsSelectors = postsAdapter.getSelectors()
 
-export const { postsReceived, deletePost, editPost } = actions
+export const { postsReceived, deletePost, editPost, createPost } = actions
 // export const { createPost, setPosts, deletePost } = actions

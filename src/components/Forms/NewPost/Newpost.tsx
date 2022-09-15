@@ -3,10 +3,15 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 
 import { Input } from 'components/shared/Input/Input'
 
+import { useNavigate } from 'react-router-dom'
+import { useAppDispatch } from 'store/store'
+import { createPost } from 'store/posts/postSlice'
+
+import Cat from 'assets/cattato.jpg'
 import { Back, Container, Field } from './styled'
 
 interface NewPost {
-  id: undefined
+  id: string
   owner: string
   text: string
   img: string
@@ -19,16 +24,15 @@ export const NewPost: FC<NewPost> = () => {
 
   const values = watch(['owner', 'text', 'img'])
 
-  // const dispatch = useAppDispatch()
-  // const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const addPost = () => {
     console.log('add post')
-    // dispatch(createPost(...values))
-    // navigate('/')
+    dispatch(createPost(values))
+    navigate('/', { replace: true })
   }
 
-  console.log(values)
   return (
     <Back>
       <Container onSubmit={handleSubmit(onSubmit)}>
@@ -47,7 +51,8 @@ export const NewPost: FC<NewPost> = () => {
 
         <Field>
           Фото животного
-          <Input type='file' {...register('img')} />
+          {/* <Input type='file' {...register('img')} /> */}
+          <img src={Cat} {...register('img')} />
         </Field>
 
         <input type='submit' onClick={addPost} />

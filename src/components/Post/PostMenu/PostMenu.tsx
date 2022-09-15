@@ -20,7 +20,7 @@ export const PostMenu: FC<PostMenuProps> = ({ id }) => {
     console.log('delete')
   }
   const handleEdit = () => {
-    navigate('/editpost', { replace: true })
+    navigate(`/edit/post${id}`, { replace: true })
   }
 
   return (
