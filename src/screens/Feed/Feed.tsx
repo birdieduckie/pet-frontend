@@ -1,10 +1,14 @@
 import { useAppDispatch, useAppSelector } from 'store/store'
 import { FC, useEffect } from 'react'
 
-import { postsReceived, postsSelectors } from 'store/posts/postSlice'
+import {
+  postsReceived,
+  postsRequested,
+  postsSelectors
+} from 'store/posts/postSlice'
 
-import { Header } from '../../components/Header/Header'
-import { Post } from '../../components/Post/Post'
+import { Header } from 'components/Header/Header'
+import { Post } from 'components/Post/Post'
 import { mockPosts } from './mock'
 
 import { Container, Posts, Head } from './styled'
@@ -18,7 +22,7 @@ export const Feed: FC<FeedProps> = () => {
 
   useEffect(() => {
     if (posts.length === 0) {
-      dispatch(postsReceived(mockPosts))
+      dispatch(postsRequested())
     }
   }, [dispatch, posts])
 
@@ -31,13 +35,13 @@ export const Feed: FC<FeedProps> = () => {
       <Posts>
         {posts?.map(post => (
           <Post
-            key={post.id}
-            id={post.id}
+            key={post._id}
+            id={post._id}
             text={post.text}
             img={post.img}
             likes={post.likes}
             createdAt={post.createdAt}
-            owner='жопа'
+            owner={post.owner}
           />
         ))}
       </Posts>

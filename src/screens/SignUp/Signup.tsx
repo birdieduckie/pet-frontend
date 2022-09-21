@@ -1,30 +1,63 @@
 import { FC } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import { nanoid } from '@reduxjs/toolkit'
 
-interface SignUp {
-  userName: string
+import { useAppDispatch } from 'store/store'
+
+import { Button } from 'components/shared/Button/Button'
+import { Input } from 'components/shared/Input/Input'
+
+import { createUser } from 'store/users/userSlice'
+
+import { Back, Container, Field } from './styled'
+
+import User from 'assets/user.svg'
+
+interface SignUpForm {
+  username: string
   phone: string
   email: string
   password: string
 }
 
 export const SignUp: FC = () => {
-  const { register, handleSubmit, watch } = useForm<SignUp>()
-  const onSubmit: SubmitHandler<SignUp> = data => console.log(data)
-  const values = watch(['userName', 'phone', 'email'])
+  const { register, handleSubmit } = useForm<SignUpForm>()
+  const onSubmit: SubmitHandler<SignUpForm> = data => {
+    console.log(data)
+    handleCreateUser(data.username)
+  }
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
-  console.log(values)
+  const handleCreateUser = (username: string) => {
+    const id = nanoid()
+    const img = User
+    const createdAt = Date().toString()
+    dispatch(createUser({ id, username, img, createdAt }))
+    navigate('/', { replace: true })
+  }
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label>Придумайте никнейм!</label>
-      <input {...register('userName')} />
-      <label>Номер телефона</label>
-      <input {...register('phone')} />
-      <label>E-mail</label>
-      <input {...register('email')} />
-      <label>Пароль</label>
-      <input placeholder='Не менее 8 символов' {...register('password')} />
-      <input type='submit' />
-    </form>
+    <Back>
+      <Container onSubmit={handleSubmit(onSubmit)}>
+        <Field>
+          Придумайте никнейм!
+          <Input {...register('username')} />
+        </Field>
+        <Field>
+          Номер телефона
+          <Input {...register('phone')} />
+        </Field>
+        <Field>
+          E-mail
+          <Input {...register('email')} />
+        </Field>
+        <Field>
+          Пароль
+          <Input placeholder='Не менее 8 символов' {...register('password')} />
+        </Field>
+        <Button type='submit' />
+      </Container>
+    </Back>
   )
 }

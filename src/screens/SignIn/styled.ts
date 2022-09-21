@@ -18,6 +18,7 @@ export const Container = styled.form`
   align-items: center;
   background: white;
   border-radius: 4px;
+  font-family: 'Montserrat', sans-serif;
 `
 export const Field = styled.label`
   display: flex;

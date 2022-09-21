@@ -7,8 +7,11 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { Input } from 'components/shared/Input/Input'
 import { editPost } from 'store/posts/postSlice'
 
+import { Back, Container, Field } from './styled'
+import { Button } from 'components/shared/Button/Button'
+
 interface EditPostForm {
-  title: string
+  text: string
 }
 
 export const EditPost: FC = () => {
@@ -20,9 +23,8 @@ export const EditPost: FC = () => {
   const navigate = useNavigate()
 
   const onSubmit: SubmitHandler<EditPostForm> = data => {
-    // handleEditPost(text)
     console.log(data)
-    handleEditPost(data.title)
+    handleEditPost(data.text)
   }
 
   const handleEditPost = (text: string) => {
@@ -33,10 +35,12 @@ export const EditPost: FC = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label></label>
-      <Input type='text' {...register('title')} />
-      <button type='submit' />
-    </form>
+    <Back>
+      <Container onSubmit={handleSubmit(onSubmit)}>
+        <label></label>
+        <Input type='text' {...register('text')} />
+        <Button type='submit' />
+      </Container>
+    </Back>
   )
 }

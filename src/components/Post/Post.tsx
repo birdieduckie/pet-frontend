@@ -15,10 +15,10 @@ interface PostProps {
   img: string
   likes: number
   createdAt: string
-  owner?: string
+  owner: string
 }
 
-export const Post: FC<PostProps> = ({ id, text, img, likes }) => {
+export const Post: FC<PostProps> = ({ id, text, img, likes, owner }) => {
   const [isShown, setIsShown] = useState(false)
 
   const showMenu = () => {
@@ -48,7 +48,7 @@ export const Post: FC<PostProps> = ({ id, text, img, likes }) => {
         {likes}
       </Likes>
       <Body>
-        <User id='1' username='жопа' avatar='' />
+        <User id={owner} username='жопа' avatar='' />
         {text}
       </Body>
       <Comment text='Какой хорошенький!'></Comment>

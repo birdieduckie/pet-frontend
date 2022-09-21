@@ -26,6 +26,9 @@ export const userSlice = createSlice({
   name: USERS_SLICE,
   initialState: usersAdapter.getInitialState(),
   reducers: {
+    usersReceived: (state, action) => {
+      usersAdapter.setAll(state, action.payload)
+    },
     createUser: (state, action) => {
       usersAdapter.addOne(state, action.payload)
     }
@@ -73,4 +76,4 @@ export const usersSelectors = usersAdapter.getSelectors()
 
 export const { actions, reducer } = userSlice
 
-export const { createUser } = actions
+export const { createUser, usersReceived } = actions

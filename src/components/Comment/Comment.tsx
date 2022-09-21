@@ -6,10 +6,11 @@ import { Container, Text } from './styled'
 import photo from 'assets/photo.jpg'
 
 interface CommentProps {
-  id?: string
+  id: string
   text: string
-  publishDate?: Date
-  // author
+  publishDate: string
+  author: string
+  toPost: string
 }
 
 export const Comment: FC<CommentProps> = ({ text }) => {

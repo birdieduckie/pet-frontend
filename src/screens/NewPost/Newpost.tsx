@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
 import { Input } from 'components/shared/Input/Input'
+import { Button } from 'components/shared/Button/Button'
 
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from 'store/store'
@@ -20,16 +21,17 @@ interface NewPostForm {
 }
 
 export const NewPost: FC = () => {
-  const { register, handleSubmit, watch } = useForm<NewPostForm>()
+  const { register, handleSubmit } = useForm<NewPostForm>()
 
-  const onSubmit: SubmitHandler<NewPostForm> = data => console.log(data)
-
-  const [owner, text] = watch(['owner', 'text'])
+  const onSubmit: SubmitHandler<NewPostForm> = data => {
+    console.log(data)
+    addPost(data.text, data.owner)
+  }
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const addPost = () => {
+  const addPost = (text: string, owner: string) => {
     const id = nanoid()
     const img = Cat
     const createdAt = Date().toString()
@@ -60,7 +62,7 @@ export const NewPost: FC = () => {
           {/* <img src={Cat} {...register('img')} /> */}
         </Field>
 
-        <input type='submit' onClick={addPost} />
+        <Button type='submit' />
       </Container>
     </Back>
   )
