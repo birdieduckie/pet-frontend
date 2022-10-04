@@ -1,11 +1,13 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from 'store/store'
+import { userRequested, usersSelectors } from 'store/users/userSlice'
 
 import { Container, Avatar, Username } from './styled'
 
 interface UserProps {
   id: string
-  username: string
-  avatar: string
+  username?: string
+  avatar?: string
 }
 
 export const User: FC<UserProps> = ({ id, username, avatar }) => {

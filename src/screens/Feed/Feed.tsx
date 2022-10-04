@@ -9,7 +9,6 @@ import {
 
 import { Header } from 'components/Header/Header'
 import { Post } from 'components/Post/Post'
-import { mockPosts } from './mock'
 
 import { Container, Posts, Head } from './styled'
 

@@ -13,13 +13,11 @@ import './index.css'
 const root = createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>
 )
 
 if (module.hot) {

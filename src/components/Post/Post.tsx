@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import { User } from '../User/User'
 import { Comment } from '../Comment/Comment'
@@ -8,6 +8,8 @@ import { PostMenu } from './PostMenu/PostMenu'
 // import { getPostById } from 'store/posts/postSlice'
 
 import { Container, Head, Likes, Img, Body, ImgWrapper } from './styled'
+import { useAppDispatch, useAppSelector } from 'store/store'
+import { userRequested, usersSelectors } from 'store/users/userSlice'
 
 interface PostProps {
   id: string
@@ -25,16 +27,28 @@ export const Post: FC<PostProps> = ({ id, text, img, likes, owner }) => {
     setIsShown(current => !current)
   }
 
-  // const post = useSelector(state => getPostById(state, id))
+  const dispatch = useAppDispatch()
+  const user = useAppSelector(state =>
+    usersSelectors.selectById(state.users, owner)
+  )
+
+  useEffect(() => {
+    if (!user) {
+      dispatch(userRequested(owner))
+    }
+  }, [dispatch, user, owner])
 
   const handleClick = () => {
     console.log(likes)
   }
 
+  const username = user?.username
+  const avatar = user?.avatar
+
   return (
     <Container>
       <Head>
-        <User id='1' username='жопа' avatar='' />
+        <User id={owner} username={username} avatar={avatar} />
         <Button variant='inline' onClick={showMenu}>
           Опции
         </Button>
@@ -48,10 +62,15 @@ export const Post: FC<PostProps> = ({ id, text, img, likes, owner }) => {
         {likes}
       </Likes>
       <Body>
-        <User id={owner} username='жопа' avatar='' />
+        <User id={owner} username={username} avatar={avatar} />
         {text}
       </Body>
-      <Comment text='Какой хорошенький!'></Comment>
+      <Comment
+        id={'1'}
+        text='Какой хорошенький!'
+        author='жопа'
+        publishDate='12.09.22'
+      ></Comment>
     </Container>
   )
 }

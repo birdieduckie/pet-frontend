@@ -17,6 +17,7 @@ import {
 
 function* getPosts() {
   try {
+    //@ts-ignore
     const response = yield call(POST_API.get, '')
 
     yield put(postsReceived(response.data))
@@ -27,6 +28,12 @@ function* getPosts() {
     console.error(error)
   }
 }
+
+// function* editPost() {
+//   try {
+//     const response = yield call(POST_API.patch, '')
+//   } catch (error) {}
+// }
 
 // function* addPost() {
 //   if (navigate) {

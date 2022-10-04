@@ -10,7 +10,6 @@ interface CommentProps {
   text: string
   publishDate: string
   author: string
-  toPost: string
 }
 
 export const Comment: FC<CommentProps> = ({ text }) => {

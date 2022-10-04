@@ -2,15 +2,14 @@ import {
   createSlice,
   PayloadAction,
   nanoid,
-  createEntityAdapter
+  createEntityAdapter,
+  current
 } from '@reduxjs/toolkit'
 
 export interface User {
-  id: string
-  userName: string
-  firstName: string
-  lastName: string
-  userPic: string
+  _id: string
+  username: string
+  avatar: string
   email: string
   phone: string
   password: string
@@ -19,18 +18,30 @@ export interface User {
 export const USERS_SLICE = 'users'
 
 const usersAdapter = createEntityAdapter<User>({
-  sortComparer: (a, b) => a.userName.localeCompare(b.userName)
+  selectId: user => user._id,
+  sortComparer: (a, b) => a.username.localeCompare(b.username)
 })
 
 export const userSlice = createSlice({
   name: USERS_SLICE,
   initialState: usersAdapter.getInitialState(),
   reducers: {
-    usersReceived: (state, action) => {
-      usersAdapter.setAll(state, action.payload)
-    },
     createUser: (state, action) => {
       usersAdapter.addOne(state, action.payload)
+    },
+    userRequested: (state, action: PayloadAction<User['_id']>) => {
+      console.log(action.payload)
+
+      console.log('requested')
+    },
+    userRequestError(error) {
+      // state.Status = 'FAILURE'
+      console.log(error)
+    },
+    userReceived: (state, action) => {
+      usersAdapter.setOne(state, action.payload)
+
+      console.log(current(state))
     }
   }
   // prepare: (
@@ -76,4 +87,5 @@ export const usersSelectors = usersAdapter.getSelectors()
 
 export const { actions, reducer } = userSlice
 
-export const { createUser, usersReceived } = actions
+export const { createUser, userReceived, userRequestError, userRequested } =
+  actions
