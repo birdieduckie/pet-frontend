@@ -1,14 +1,14 @@
 import { FC } from 'react'
-
-import { useAppDispatch } from 'store/store'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
 import { Input } from 'components/shared/Input/Input'
+import { Button } from 'components/shared/Button/Button'
+
 import { editPost } from 'store/posts/postSlice'
+import { useAppDispatch } from 'store/store'
 
 import { Back, Container, Field } from './styled'
-import { Button } from 'components/shared/Button/Button'
 
 interface EditPostForm {
   text: string
@@ -30,9 +30,7 @@ export const EditPost: FC = () => {
   const handleEditPost = (text: string) => {
     console.log({ id, text })
 
-    dispatch(editPost({ id, text }))
-
-    navigate('/', { replace: true })
+    dispatch(editPost({ id, text, navigate }))
   }
 
   return (

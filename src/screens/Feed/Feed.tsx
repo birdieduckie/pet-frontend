@@ -1,11 +1,7 @@
 import { useAppDispatch, useAppSelector } from 'store/store'
 import { FC, useEffect } from 'react'
 
-import {
-  postsReceived,
-  postsRequested,
-  postsSelectors
-} from 'store/posts/postSlice'
+import { postsRequested, postsSelectors } from 'store/posts/postSlice'
 
 import { Header } from 'components/Header/Header'
 import { Post } from 'components/Post/Post'

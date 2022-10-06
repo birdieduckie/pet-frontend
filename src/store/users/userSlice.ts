@@ -1,7 +1,6 @@
 import {
   createSlice,
   PayloadAction,
-  nanoid,
   createEntityAdapter,
   current
 } from '@reduxjs/toolkit'
@@ -44,43 +43,6 @@ export const userSlice = createSlice({
       console.log(current(state))
     }
   }
-  // prepare: (
-  //   userName:,
-  //   firstName: User['firstName'],
-  //   lastName: User['lastName'],
-  //   userPic: User['userPic'],
-  //   email: User['email'],
-  //   phone: User['phone'],
-  //   password: User['password']
-  // ) => {
-  //   const id = nanoid()
-  //   return {
-  //     payload: {
-  //       id,
-  //       userName,
-  //       firstName,
-  //       lastName,
-  //       userPic,
-  //       email,
-  //       phone,
-  //       password
-  //     }
-  //   }
-  // },
-
-  // editUser(state, action: PayloadAction<User>) {
-  //   state.map(User =>
-  //     User.id === action.payload.id
-  //       ? User.userName === action.payload.userName
-  //       : User
-  //   )
-  // },
-  // deleteUser(state, action: PayloadAction<User['id']>) {
-  //   state.filter(User => User.id !== action.payload)
-  // },
-  // setUsers(state, action: PayloadAction<User[]>) {
-  //   return action.payload
-  // }
 })
 
 export const usersSelectors = usersAdapter.getSelectors()

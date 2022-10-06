@@ -1,23 +1,14 @@
-import {
-  call,
-  put,
-  take,
-  takeEvery,
-  takeLatest,
-  takeLeading
-} from 'redux-saga/effects'
+import { call, put, takeLatest, takeLeading } from 'redux-saga/effects'
 
 import { POST_API } from 'core/api'
 
 import {
-  createPost,
   editPost,
   editPostSuccess,
   postsReceived,
   postsRequested,
   postsRequestError
 } from './postSlice'
-import { useSearchParams } from 'react-router-dom'
 
 function* getPosts() {
   try {
@@ -33,16 +24,16 @@ function* getPosts() {
   }
 }
 //@ts-ignore
-function* postEdit({ payload: { id, text } }) {
+function* postEdit({ payload: { id, text, navigate } }) {
   try {
-    console.log('saga!')
-
-    console.log(id)
     //@ts-ignore
     const response = yield call(POST_API.patch, `/${id}/edit`, { text })
 
     yield put(editPostSuccess({ id, changes: { text } }))
-    console.log(response)
+
+    if (navigate) {
+      navigate('/')
+    }
   } catch (error) {
     yield put(postsRequestError())
     console.error(error)

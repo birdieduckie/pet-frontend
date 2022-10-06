@@ -1,14 +1,9 @@
-import {
-  call,
-  put,
-  takeEvery,
-  takeLatest,
-  takeLeading
-} from 'redux-saga/effects'
+import { call, put, takeEvery } from 'redux-saga/effects'
 
 import { USER_API } from 'core/api'
 
 import { userReceived, userRequestError, userRequested } from './userSlice'
+
 //@ts-ignore
 function* getUser({ payload: id }) {
   try {

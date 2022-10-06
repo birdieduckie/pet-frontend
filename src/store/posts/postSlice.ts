@@ -1,9 +1,4 @@
-import {
-  createEntityAdapter,
-  createSlice,
-  isDraft,
-  original
-} from '@reduxjs/toolkit'
+import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 
 import { Status } from 'store/types'
 
@@ -29,7 +24,7 @@ export const postSlice = createSlice({
   name: POSTS_SLICE,
   initialState: postsAdapter.getInitialState(),
   reducers: {
-    postsRequested(state) {
+    postsRequested() {
       console.log('request')
     },
     postsReceived(state, action) {
@@ -39,13 +34,12 @@ export const postSlice = createSlice({
     },
     postsRequestError(error) {
       // state.Status = 'FAILURE'
-      console.log('error')
+      console.error(error)
     },
     editPost(state, action) {
       console.log(action.payload)
     },
     editPostSuccess(state, action) {
-      console.log(action.payload)
       postsAdapter.updateOne(state, action.payload)
     },
     deletePost(state, action) {
