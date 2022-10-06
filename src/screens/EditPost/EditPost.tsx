@@ -30,7 +30,8 @@ export const EditPost: FC = () => {
   const handleEditPost = (text: string) => {
     console.log({ id, text })
 
-    dispatch(editPost({ id, changes: { text } }))
+    dispatch(editPost({ id, text }))
+
     navigate('/', { replace: true })
   }
 

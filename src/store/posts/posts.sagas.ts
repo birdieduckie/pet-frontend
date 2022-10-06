@@ -1,6 +1,7 @@
 import {
   call,
   put,
+  take,
   takeEvery,
   takeLatest,
   takeLeading
@@ -10,10 +11,13 @@ import { POST_API } from 'core/api'
 
 import {
   createPost,
+  editPost,
+  editPostSuccess,
   postsReceived,
   postsRequested,
   postsRequestError
 } from './postSlice'
+import { useSearchParams } from 'react-router-dom'
 
 function* getPosts() {
   try {
@@ -28,12 +32,22 @@ function* getPosts() {
     console.error(error)
   }
 }
+//@ts-ignore
+function* postEdit({ payload: { id, text } }) {
+  try {
+    console.log('saga!')
 
-// function* editPost() {
-//   try {
-//     const response = yield call(POST_API.patch, '')
-//   } catch (error) {}
-// }
+    console.log(id)
+    //@ts-ignore
+    const response = yield call(POST_API.patch, `/${id}/edit`, { text })
+
+    yield put(editPostSuccess({ id, changes: { text } }))
+    console.log(response)
+  } catch (error) {
+    yield put(postsRequestError())
+    console.error(error)
+  }
+}
 
 // function* addPost() {
 //   if (navigate) {
@@ -47,4 +61,8 @@ function* getPosts() {
 
 export function* watchGetPosts() {
   yield takeLatest(postsRequested, getPosts)
+}
+
+export function* watchEditPost() {
+  yield takeLeading(editPost, postEdit)
 }

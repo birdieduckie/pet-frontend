@@ -19,7 +19,7 @@ export const App: FC<AppProps> = () => {
         <Route path='/newpost' element={<NewPost />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/login' element={<SignIn />} />
-        <Route path='/post/:id/edit' element={<EditPost />} />
+        <Route path='/:id/edit' element={<EditPost />} />
         <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
     </Container>
