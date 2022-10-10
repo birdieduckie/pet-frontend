@@ -5,6 +5,8 @@ import {
   current
 } from '@reduxjs/toolkit'
 
+import { Status } from 'store/types'
+
 export interface User {
   _id: string
   username: string
@@ -23,27 +25,26 @@ const usersAdapter = createEntityAdapter<User>({
 
 export const userSlice = createSlice({
   name: USERS_SLICE,
-  initialState: usersAdapter.getInitialState(),
+  initialState: usersAdapter.getInitialState({
+    status: Status.Initial
+  }),
   reducers: {
     createUserRequest: (state, action) => {
-      console.log(action.payload)
+      state.status = Status.Pending
     },
     createUserSuccess: (state, action) => {
       usersAdapter.addOne(state, action.payload)
+      state.status = Status.Success
     },
     userRequested: (state, action: PayloadAction<User['_id']>) => {
-      console.log(action.payload)
-
-      console.log('requested')
+      state.status = Status.Pending
     },
-    userRequestError(error) {
-      // state.Status = 'FAILURE'
-      console.log(error)
+    userRequestError(state) {
+      state.status = Status.Failure
     },
     userReceived: (state, action) => {
       usersAdapter.setOne(state, action.payload)
-
-      console.log(current(state))
+      state.status = Status.Success
     }
   }
 })

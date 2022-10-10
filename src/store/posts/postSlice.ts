@@ -22,37 +22,40 @@ export const POSTS_SLICE = 'posts'
 
 export const postSlice = createSlice({
   name: POSTS_SLICE,
-  initialState: postsAdapter.getInitialState(),
+  initialState: postsAdapter.getInitialState({
+    status: Status.Initial
+  }),
   reducers: {
-    postsRequested() {
-      console.log('request')
+    postsRequested(state) {
+      state.status = Status.Pending
     },
     postsReceived(state, action) {
       postsAdapter.setAll(state, action.payload)
-      console.log('received')
-      // state.Status = 'SUCCESS'
+      state.status = Status.Success
     },
-    postsRequestError(error) {
-      // state.Status = 'FAILURE'
-      console.error(error)
+    postsRequestError(state) {
+      state.status = Status.Failure
     },
     editPostRequest(state, action) {
-      console.log(action.payload)
+      state.status = Status.Pending
     },
     editPostSuccess(state, action) {
       postsAdapter.updateOne(state, action.payload)
+      state.status = Status.Success
     },
     deletePostRequest(state, action) {
-      console.log(action.payload)
+      state.status = Status.Pending
     },
     deletePostSuccess(state, action) {
       postsAdapter.removeOne(state, action.payload)
+      state.status = Status.Success
     },
     createPostRequest(state, action) {
-      console.log(action.payload)
+      state.status = Status.Pending
     },
     createPostSuccess(state, action) {
       postsAdapter.addOne(state, action.payload)
+      state.status = Status.Success
     }
   }
 })
