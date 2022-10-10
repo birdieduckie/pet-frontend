@@ -1,18 +1,15 @@
 import { FC } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { nanoid } from '@reduxjs/toolkit'
 
 import { useAppDispatch } from 'store/store'
 
 import { Button } from 'components/shared/Button/Button'
 import { Input } from 'components/shared/Input/Input'
 
-import { createUser } from 'store/users/userSlice'
+import { createUserRequest } from 'store/users/userSlice'
 
 import { Back, Container, Field } from './styled'
-
-import User from 'assets/user.svg'
 
 interface SignUpForm {
   username: string
@@ -25,17 +22,23 @@ export const SignUp: FC = () => {
   const { register, handleSubmit } = useForm<SignUpForm>()
   const onSubmit: SubmitHandler<SignUpForm> = data => {
     console.log(data)
-    handleCreateUser(data.username)
+    handleCreateUser(data.username, data.phone, data.email, data.password)
   }
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const handleCreateUser = (username: string) => {
-    const id = nanoid()
-    const img = User
-    const createdAt = Date().toString()
-    dispatch(createUser({ id, username, img, createdAt }))
-    navigate('/', { replace: true })
+  const handleCreateUser = (
+    username: string,
+    phone: string,
+    email: string,
+    password: string
+  ) => {
+    const avatar =
+      'https://www.rd.com/wp-content/uploads/2018/05/shutterstock_464300804.jpg'
+
+    dispatch(
+      createUserRequest({ username, phone, email, password, avatar, navigate })
+    )
   }
   return (
     <Back>

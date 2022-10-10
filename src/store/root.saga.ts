@@ -6,7 +6,10 @@ import {
   watchAddPost as watchAddPostSaga,
   watchDeletePost as watchDeletePostSaga
 } from './posts/posts.sagas'
-import { watchGetUser as watchGetUserSaga } from './users/users.sagas'
+import {
+  watchGetUser as watchGetUserSaga,
+  watchCreateUser as watchCreateUserSaga
+} from './users/users.sagas'
 // import { watchGetCities as watchGetCitiesSaga } from './cities/cities.saga'
 
 export function* rootSaga() {
@@ -15,6 +18,7 @@ export function* rootSaga() {
     watchEditPostSaga(),
     watchAddPostSaga(),
     watchDeletePostSaga(),
-    watchGetUserSaga()
+    watchGetUserSaga(),
+    watchCreateUserSaga()
   ])
 }
