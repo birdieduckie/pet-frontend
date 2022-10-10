@@ -1,6 +1,4 @@
-import { FC, useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from 'store/store'
-import { userRequested, usersSelectors } from 'store/users/userSlice'
+import { FC } from 'react'
 
 import { Container, Avatar, Username } from './styled'
 

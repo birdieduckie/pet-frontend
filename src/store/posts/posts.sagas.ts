@@ -4,12 +4,14 @@ import { POST_API } from 'core/api'
 
 import {
   createPostSuccess,
-  createPost,
-  editPost,
+  createPostRequest,
+  editPostRequest,
   editPostSuccess,
   postsReceived,
   postsRequested,
-  postsRequestError
+  postsRequestError,
+  deletePostRequest,
+  deletePostSuccess
 } from './postSlice'
 
 function* getPosts() {
@@ -25,6 +27,7 @@ function* getPosts() {
     console.error(error)
   }
 }
+
 //@ts-ignore
 function* postEdit({ payload: { id, text, navigate } }) {
   try {
@@ -66,8 +69,23 @@ function* postAdd({
   }
 }
 
+//@ts-ignore
+function* postDelete({ payload: id }) {
+  try {
+    console.log({ id })
+
+    //@ts-ignore
+    const response = yield call(POST_API.delete, `/${id}/delete`)
+
+    yield put(deletePostSuccess(id))
+  } catch (error) {
+    yield put(postsRequestError())
+    console.error(error)
+  }
+}
+
 export function* watchAddPost() {
-  yield takeLeading(createPost, postAdd)
+  yield takeLeading(createPostRequest, postAdd)
 }
 
 export function* watchGetPosts() {
@@ -75,5 +93,8 @@ export function* watchGetPosts() {
 }
 
 export function* watchEditPost() {
-  yield takeLeading(editPost, postEdit)
+  yield takeLeading(editPostRequest, postEdit)
+}
+export function* watchDeletePost() {
+  yield takeLeading(deletePostRequest, postDelete)
 }

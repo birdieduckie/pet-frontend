@@ -5,7 +5,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { Input } from 'components/shared/Input/Input'
 import { Button } from 'components/shared/Button/Button'
 
-import { editPost } from 'store/posts/postSlice'
+import { editPostRequest } from 'store/posts/postSlice'
 import { useAppDispatch } from 'store/store'
 
 import { Back, Container, Field } from './styled'
@@ -17,7 +17,7 @@ interface EditPostForm {
 export const EditPost: FC = () => {
   const { register, handleSubmit } = useForm<EditPostForm>()
 
-  const { id } = useParams<{ id: string }>()
+  const { id } = useParams()
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -30,7 +30,7 @@ export const EditPost: FC = () => {
   const handleEditPost = (text: string) => {
     console.log({ id, text })
 
-    dispatch(editPost({ id, text, navigate }))
+    dispatch(editPostRequest({ id, text, navigate }))
   }
 
   return (

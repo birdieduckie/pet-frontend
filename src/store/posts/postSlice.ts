@@ -36,17 +36,19 @@ export const postSlice = createSlice({
       // state.Status = 'FAILURE'
       console.error(error)
     },
-    editPost(state, action) {
+    editPostRequest(state, action) {
       console.log(action.payload)
     },
     editPostSuccess(state, action) {
       postsAdapter.updateOne(state, action.payload)
     },
-    deletePost(state, action) {
+    deletePostRequest(state, action) {
+      console.log(action.payload)
+    },
+    deletePostSuccess(state, action) {
       postsAdapter.removeOne(state, action.payload)
     },
-    createPost(state, action) {
-      console.log('creating...')
+    createPostRequest(state, action) {
       console.log(action.payload)
     },
     createPostSuccess(state, action) {
@@ -63,9 +65,10 @@ export const {
   postsRequested,
   postsReceived,
   postsRequestError,
-  deletePost,
-  editPost,
+  deletePostRequest,
+  deletePostSuccess,
+  editPostRequest,
   editPostSuccess,
-  createPost,
+  createPostRequest,
   createPostSuccess
 } = actions

@@ -4,7 +4,7 @@ import { Button } from 'components/shared/Button/Button'
 
 import { Container } from './styled'
 import { useNavigate } from 'react-router-dom'
-import { deletePost } from 'store/posts/postSlice'
+import { deletePostRequest } from 'store/posts/postSlice'
 import { useAppDispatch } from 'store/store'
 
 interface PostMenuProps {
@@ -16,7 +16,7 @@ export const PostMenu: FC<PostMenuProps> = ({ id }) => {
   const dispatch = useAppDispatch()
 
   const handleDelete = () => {
-    dispatch(deletePost(id))
+    dispatch(deletePostRequest(id))
   }
   const handleEdit = () => {
     navigate(`/${id}/edit`, { replace: true })

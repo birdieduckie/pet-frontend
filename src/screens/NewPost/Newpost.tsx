@@ -6,9 +6,8 @@ import { Button } from 'components/shared/Button/Button'
 
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from 'store/store'
-import { createPost } from 'store/posts/postSlice'
+import { createPostRequest } from 'store/posts/postSlice'
 
-import Cat from 'assets/cattato.jpg'
 import { Back, Container, Field } from './styled'
 
 interface NewPostForm {
@@ -23,16 +22,15 @@ export const NewPost: FC = () => {
 
   const onSubmit: SubmitHandler<NewPostForm> = data => {
     console.log(data)
-    addPost(data.text, data.username)
+    addPost(data.text, data.username, data.img)
   }
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const addPost = (text: string, username: string) => {
-    const img = Cat
+  const addPost = (text: string, username: string, img: string) => {
     const createdAt = Date().toString()
-    dispatch(createPost({ username, text, img, createdAt, navigate }))
+    dispatch(createPostRequest({ username, text, img, createdAt, navigate }))
   }
 
   return (
