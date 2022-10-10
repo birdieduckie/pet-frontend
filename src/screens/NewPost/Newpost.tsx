@@ -10,11 +10,9 @@ import { createPost } from 'store/posts/postSlice'
 
 import Cat from 'assets/cattato.jpg'
 import { Back, Container, Field } from './styled'
-import { nanoid } from '@reduxjs/toolkit'
 
 interface NewPostForm {
-  id: string
-  owner: string
+  username: string
   text: string
   img: string
   createdAt: string
@@ -25,18 +23,16 @@ export const NewPost: FC = () => {
 
   const onSubmit: SubmitHandler<NewPostForm> = data => {
     console.log(data)
-    addPost(data.text, data.owner)
+    addPost(data.text, data.username)
   }
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const addPost = (text: string, owner: string) => {
-    const id = nanoid()
+  const addPost = (text: string, username: string) => {
     const img = Cat
     const createdAt = Date().toString()
-    dispatch(createPost({ id, owner, text, img, createdAt }))
-    navigate('/', { replace: true })
+    dispatch(createPost({ username, text, img, createdAt, navigate }))
   }
 
   return (
@@ -44,7 +40,7 @@ export const NewPost: FC = () => {
       <Container onSubmit={handleSubmit(onSubmit)}>
         <Field>
           Как вас зовут?
-          <Input {...register('owner')} />
+          <Input {...register('username')} />
         </Field>
 
         <Field>
@@ -58,7 +54,13 @@ export const NewPost: FC = () => {
         <Field>
           Фото животного
           {/* <Input type='file' {...register('img')} /> */}
-          <img src={Cat} />
+          <img
+            src={
+              // eslint-disable-next-line max-len
+              'https://www.rd.com/wp-content/uploads/2021/04/GettyImages-106649919-scaled-e1618860834581.jpg'
+            }
+            {...register('img')}
+          />
           {/* <img src={Cat} {...register('img')} /> */}
         </Field>
 

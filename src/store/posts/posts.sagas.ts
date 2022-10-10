@@ -3,6 +3,8 @@ import { call, put, takeLatest, takeLeading } from 'redux-saga/effects'
 import { POST_API } from 'core/api'
 
 import {
+  createPostSuccess,
+  createPost,
   editPost,
   editPostSuccess,
   postsReceived,
@@ -40,15 +42,33 @@ function* postEdit({ payload: { id, text, navigate } }) {
   }
 }
 
-// function* addPost() {
-//   if (navigate) {
-//     navigate(`/weather/${response.data.id}?lat=${geo.lat}&lng=${geo.lng}`)
-//   }
-// }
+function* postAdd({
+  //@ts-ignore
+  payload: { username, text, img, createdAt, navigate }
+}) {
+  try {
+    //@ts-ignore
+    const response = yield call(POST_API.post, '/newpost', {
+      username,
+      img,
+      text,
+      createdAt
+    })
 
-// export function* watchAddPost() {
-//   yield takeLeading(createPost, addPost)
-// }
+    yield put(createPostSuccess(response.data))
+
+    if (navigate) {
+      navigate('/')
+    }
+  } catch (error) {
+    yield put(postsRequestError())
+    console.error(error)
+  }
+}
+
+export function* watchAddPost() {
+  yield takeLeading(createPost, postAdd)
+}
 
 export function* watchGetPosts() {
   yield takeLatest(postsRequested, getPosts)

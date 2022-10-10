@@ -46,6 +46,10 @@ export const postSlice = createSlice({
       postsAdapter.removeOne(state, action.payload)
     },
     createPost(state, action) {
+      console.log('creating...')
+      console.log(action.payload)
+    },
+    createPostSuccess(state, action) {
       postsAdapter.addOne(state, action.payload)
     }
   }
@@ -62,5 +66,6 @@ export const {
   deletePost,
   editPost,
   editPostSuccess,
-  createPost
+  createPost,
+  createPostSuccess
 } = actions
