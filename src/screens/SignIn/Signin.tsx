@@ -8,18 +8,26 @@ import { Button } from 'components/shared/Button/Button'
 import { Input } from 'components/shared/Input/Input'
 
 import { Back, Container, Field } from './styled'
+import { userLoginRequest } from 'store/users/userSlice'
 
 interface SignInForm {
-  userName: string
+  username: string
   password: string
 }
 
 export const SignIn: FC = () => {
   const { register, handleSubmit } = useForm<SignInForm>()
-  const onSubmit: SubmitHandler<SignInForm> = data => console.log(data)
+  const onSubmit: SubmitHandler<SignInForm> = data => {
+    console.log(data)
+    handleLogin(data.username, data.password)
+  }
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+
+  const handleLogin = (username: string, password: string) => {
+    dispatch(userLoginRequest({ username, password, navigate }))
+  }
 
   const toSignUp = () => {
     navigate('/signup', { replace: true })
@@ -31,7 +39,7 @@ export const SignIn: FC = () => {
         Мы вас не узнали!
         <Field>
           Ваш никнейм
-          <Input {...register('userName')} />
+          <Input {...register('username')} />
         </Field>
         <Field>
           Пароль

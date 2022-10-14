@@ -22,14 +22,16 @@ export const NewPost: FC = () => {
 
   const onSubmit: SubmitHandler<NewPostForm> = data => {
     console.log(data)
-    addPost(data.text, data.username, data.img)
+    addPost(data.text, data.username)
   }
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const addPost = (text: string, username: string, img: string) => {
+  const addPost = (text: string, username: string) => {
     const createdAt = Date().toString()
+    const img =
+      'https://www.rd.com/wp-content/uploads/2021/04/GettyImages-106649919-scaled-e1618860834581.jpg'
     dispatch(createPostRequest({ username, text, img, createdAt, navigate }))
   }
 
@@ -54,7 +56,6 @@ export const NewPost: FC = () => {
           {/* <Input type='file' {...register('img')} /> */}
           <img
             src={
-              // eslint-disable-next-line max-len
               'https://www.rd.com/wp-content/uploads/2021/04/GettyImages-106649919-scaled-e1618860834581.jpg'
             }
             {...register('img')}

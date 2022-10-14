@@ -1,8 +1,7 @@
 import {
   createSlice,
   PayloadAction,
-  createEntityAdapter,
-  current
+  createEntityAdapter
 } from '@reduxjs/toolkit'
 
 import { Status } from 'store/types'
@@ -45,6 +44,15 @@ export const userSlice = createSlice({
     userReceived: (state, action) => {
       usersAdapter.setOne(state, action.payload)
       state.status = Status.Success
+    },
+    userLoginRequest: (state, action) => {
+      state.status = Status.Pending
+    },
+    userLoginSuccess: (state, action) => {
+      state.status = Status.Success
+    },
+    userLoginError(state) {
+      state.status = Status.Failure
     }
   }
 })
@@ -58,5 +66,8 @@ export const {
   createUserSuccess,
   userReceived,
   userRequestError,
-  userRequested
+  userRequested,
+  userLoginError,
+  userLoginRequest,
+  userLoginSuccess
 } = actions

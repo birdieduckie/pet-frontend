@@ -7,7 +7,10 @@ import {
   userRequestError,
   userRequested,
   createUserRequest,
-  createUserSuccess
+  createUserSuccess,
+  userLoginRequest,
+  userLoginSuccess,
+  userLoginError
 } from './userSlice'
 
 //@ts-ignore
@@ -31,7 +34,6 @@ function* createUser({
   payload: { username, email, avatar, phone, password, navigate }
 }) {
   try {
-    console.log({ username })
     //@ts-ignore
     const response = yield call(USER_API.post, '/signup', {
       username,
@@ -46,10 +48,29 @@ function* createUser({
     if (navigate) {
       navigate('/')
     }
-    console.log(response.data)
   } catch (error) {
     yield put(userRequestError())
     console.error(error)
+  }
+}
+//@ts-ignore
+function* loginUser({ payload: { username, password, navigate } }) {
+  try {
+    console.log(password)
+    //@ts-ignore
+
+    const response = yield call(USER_API.post, '/login', { username, password })
+
+    yield put(userLoginSuccess(response.data))
+
+    localStorage.setItem('user', JSON.stringify(response.data))
+
+    if (navigate) {
+      navigate('/')
+    }
+  } catch (error) {
+    yield put(userLoginError())
+    console.log(error)
   }
 }
 
@@ -59,4 +80,8 @@ export function* watchGetUser() {
 
 export function* watchCreateUser() {
   yield takeLeading(createUserRequest, createUser)
+}
+
+export function* watchLogin() {
+  yield takeLeading(userLoginRequest, loginUser)
 }
