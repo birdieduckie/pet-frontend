@@ -5,8 +5,6 @@ import { Comment } from '../Comment/Comment'
 import { Button } from 'components/shared/Button/Button'
 import { PostMenu } from './PostMenu/PostMenu'
 
-// import { getPostById } from 'store/posts/postSlice'
-
 import { Container, Head, Likes, Img, Body, ImgWrapper } from './styled'
 import { useAppDispatch, useAppSelector } from 'store/store'
 import { userRequested, usersSelectors } from 'store/users/userSlice'

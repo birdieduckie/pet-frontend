@@ -31,7 +31,8 @@ export const NewPost: FC = () => {
   const addPost = (text: string, username: string) => {
     const createdAt = Date().toString()
     const img =
-      'https://www.rd.com/wp-content/uploads/2021/04/GettyImages-106649919-scaled-e1618860834581.jpg'
+      // eslint-disable-next-line max-len
+      'https://images.unsplash.com/photo-1569013279783-1c1f3a057657?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'
     dispatch(createPostRequest({ username, text, img, createdAt, navigate }))
   }
 
@@ -54,12 +55,7 @@ export const NewPost: FC = () => {
         <Field>
           Фото животного
           {/* <Input type='file' {...register('img')} /> */}
-          <img
-            src={
-              'https://www.rd.com/wp-content/uploads/2021/04/GettyImages-106649919-scaled-e1618860834581.jpg'
-            }
-            {...register('img')}
-          />
+          <img {...register('img')} />
           {/* <img src={Cat} {...register('img')} /> */}
         </Field>
 

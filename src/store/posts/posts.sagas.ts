@@ -11,7 +11,10 @@ import {
   postsRequested,
   postsRequestError,
   deletePostRequest,
-  deletePostSuccess
+  deletePostSuccess,
+  postRequested,
+  postReceived,
+  postRequestError
 } from './postSlice'
 
 function* getPosts() {
@@ -24,6 +27,22 @@ function* getPosts() {
     console.log(response.data)
   } catch (error) {
     yield put(postsRequestError())
+    console.error(error)
+  }
+}
+
+//@ts-ignore
+
+function* getPost({ payload: id }) {
+  try {
+    //@ts-ignore
+    const response = yield call(POST_API.get, `/${id}`)
+
+    yield put(postReceived(response.data))
+
+    console.log(response.data)
+  } catch (error) {
+    yield put(postRequestError())
     console.error(error)
   }
 }
@@ -90,6 +109,10 @@ export function* watchAddPost() {
 
 export function* watchGetPosts() {
   yield takeLatest(postsRequested, getPosts)
+}
+
+export function* watchGetPost() {
+  yield takeLatest(postRequested, getPost)
 }
 
 export function* watchEditPost() {

@@ -20,18 +20,17 @@ export const Header: FC<HeaderProps> = () => {
   const showMenu = () => {
     setIsShown(current => !current)
   }
+  // const mainUser = localStorage.getItem('user')
+  // JSON.parse(mainUser)
 
   const handleClick = () => {
     navigate('/newpost', { replace: true })
   }
 
-  const getPosts = () => console.log('get posts')
   return (
     <Container>
       <Logo></Logo>
-      <Button variant='inline' onClick={getPosts}>
-        Загрузить посты
-      </Button>
+
       <Button variant='inline' onClick={handleClick}>
         Новый пост
       </Button>

@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from 'store/store'
 import { FC, useEffect } from 'react'
+import { FixedSizeList as List } from 'react-window'
 
 import { postsRequested, postsSelectors } from 'store/posts/postSlice'
 

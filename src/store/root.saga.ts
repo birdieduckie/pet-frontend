@@ -2,6 +2,7 @@ import { all } from 'redux-saga/effects'
 
 import {
   watchGetPosts as watchGetPostsSaga,
+  watchGetPost as watchGetPostSaga,
   watchEditPost as watchEditPostSaga,
   watchAddPost as watchAddPostSaga,
   watchDeletePost as watchDeletePostSaga
@@ -15,6 +16,7 @@ import {
 
 export function* rootSaga() {
   yield all([
+    watchGetPostSaga(),
     watchGetPostsSaga(),
     watchEditPostSaga(),
     watchAddPostSaga(),
