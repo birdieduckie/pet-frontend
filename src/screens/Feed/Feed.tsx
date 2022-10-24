@@ -1,13 +1,14 @@
-import { useAppDispatch, useAppSelector } from 'store/store'
 import { FC, useEffect } from 'react'
 import { FixedSizeList as List } from 'react-window'
-
-import { postsRequested, postsSelectors } from 'store/posts/postSlice'
+import AutoSizer from 'react-virtualized-auto-sizer'
 
 import { Header } from 'components/Header/Header'
+
 import { Post } from 'components/Post/Post'
 
-import { Container, Posts, Head } from './styled'
+import { Container, Head, Items } from './styled'
+import { useAppDispatch, useAppSelector } from 'store/store'
+import { postsSelectors, postsRequested } from 'store/posts/postSlice'
 
 interface FeedProps {}
 
@@ -27,20 +28,30 @@ export const Feed: FC<FeedProps> = () => {
       <Head>
         <Header />
       </Head>
-
-      <Posts>
-        {posts?.map(post => (
-          <Post
-            key={post._id}
-            id={post._id}
-            text={post.text}
-            img={post.img}
-            likes={post.likes}
-            createdAt={post.createdAt}
-            owner={post.owner}
-          />
-        ))}
-      </Posts>
+      <AutoSizer>
+        {({ height, width }) => (
+          <List
+            height={height - 1}
+            width={width - 1}
+            itemCount={posts.length}
+            itemSize={height - 1}
+          >
+            {({ index, style }) => (
+              <Items key={index} style={style}>
+                <Post
+                  key={posts[index]._id}
+                  id={posts[index]._id}
+                  text={posts[index].text}
+                  img={posts[index].img}
+                  likes={posts[index].likes}
+                  createdAt={posts[index].createdAt}
+                  owner={posts[index].owner}
+                />
+              </Items>
+            )}
+          </List>
+        )}
+      </AutoSizer>
     </Container>
   )
 }

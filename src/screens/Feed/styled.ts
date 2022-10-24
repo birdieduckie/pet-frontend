@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { FixedSizeList as List } from 'react-window'
 
 export const Container = styled.div`
   display: flex;
@@ -10,12 +11,11 @@ export const Container = styled.div`
 export const Head = styled.div`
   display: flex;
 `
-export const Posts = styled.div`
+export const Items = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 100%;
   width: 100%;
-  overflow: scroll;
   padding: 5% 0 0 0;
 `
